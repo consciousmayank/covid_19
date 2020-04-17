@@ -1,6 +1,7 @@
 import 'package:covid19graphs/models/history.dart';
 import 'package:covid19graphs/models/latest_data.dart';
 import 'package:covid19graphs/pages/widgets/data_summary_tile.dart';
+import 'package:covid19graphs/pages/widgets/expanded_state_wise_chart.dart';
 import 'package:covid19graphs/pages/widgets/state_wise_chart.dart';
 import 'package:covid19graphs/repository/homescreen_repo.dart';
 import 'package:covid19graphs/widget/header.dart';
@@ -49,7 +50,7 @@ class _LatestDataState extends State<LatestData> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         DataSummaryTile(_latestStats.data[_latestStats.data.length-1].summary),
-        StateWiseChart(_latestStats.data[_latestStats.data.length-1].regional,
+        ExpandedStateWiseChart(_latestStats.data[_latestStats.data.length-1].regional,
         _latestStats.data[_latestStats.data.length-2].regional),
         Card(
           child: ListTile(
