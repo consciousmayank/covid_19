@@ -1,6 +1,7 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:covid19graphs/models/history.dart';
 import 'package:covid19graphs/widget/textfiledstyles.dart';
+import 'package:covid19graphs/widget/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -41,66 +42,76 @@ class _StateWiseChartState extends State<StateWiseChart> {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 1,
-      child: Card(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: DropdownButton(
-                isExpanded: true,
-                style: textFieldStyle(fontSize: 20.0, textColor: Colors.black),
-                items: getDropDownItems(),
-                onChanged: (value) {
-                  print(value.toString());
-                  setState(() {
-                    _singleState = value;
-                  });
-                },
-                value: _singleState,
-                hint: Text(
-                  "Please Select a state",
-                  style:
-                      textFieldStyle(fontSize: 20.0, textColor: Colors.black),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Card(
+              shape: getCustomBeveledRectangleBorder(15.0),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                child: DropdownButton(
+                  isExpanded: true,
+                  style: textFieldStyle(fontSize: 20.0, textColor: Colors.black),
+                  items: getDropDownItems(),
+                  onChanged: (value) {
+                    print(value.toString());
+                    setState(() {
+                      _singleState = value;
+                    });
+                  },
+                  value: _singleState,
+                  hint: Text(
+                    "Please Select a state",
+                    style:
+                        textFieldStyle(fontSize: 20.0, textColor: Colors.black),
+                  ),
                 ),
               ),
             ),
-            SizedBox(
-              height: 20.0,
-            ),
-            _singleState == null
-                ? Expanded(
-                    flex: 1,
-                    child: Center(
-                      child: Text(
-                          "Please Select a State from the Above Drop Down"),
-                    ),
-                  )
-                : Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                      child: charts.BarChart(
-                        getSeries(),
-                        animate: true,
-                        barRendererDecorator:
-                            new charts.BarLabelDecorator<String>(),
-                        domainAxis: new charts.OrdinalAxisSpec(),
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+          _singleState == null
+              ? Expanded(
+                  flex: 1,
+                  child: Center(
+                    child: Text(
+                        "Please Select a State from the Above Drop Down"),
+                  ),
+                )
+              : Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: Card(
+                      shape: getCustomBeveledRectangleBorder(15.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: charts.BarChart(
+                          getSeries(),
+                          animate: true,
+                          barRendererDecorator:
+                              new charts.BarLabelDecorator<String>(),
+                          domainAxis: new charts.OrdinalAxisSpec(),
+                        ),
                       ),
                     ),
                   ),
-            _singleState == null
-                ? Container()
-                : Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Text(
-                        "${widget.currentDayRegionalData[_singleState].confirmedCasesIndian} "
-                        "cases have been reported yet"),
-                  ),
-            SizedBox(
-              height: 20.0,
-            )
-          ],
-        ),
+                ),
+          _singleState == null
+              ? Container()
+              : Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: Text(
+                      "${widget.currentDayRegionalData[_singleState].confirmedCasesIndian} "
+                      "cases have been reported yet"),
+                ),
+          SizedBox(
+            height: 20.0,
+          )
+        ],
       ),
     );
   }

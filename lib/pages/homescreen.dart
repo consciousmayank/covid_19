@@ -1,9 +1,10 @@
 import 'package:covid19graphs/pages/contacts_page.dart';
+import 'package:covid19graphs/widget/textfiledstyles.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'latest_data.dart';
 import 'notifications.dart';
+import 'latest_data.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,8 +15,9 @@ class _HomeScreenState extends State<HomeScreen> {
   var _curIndex = 0;
   Widget bodyContent;
   Widget tempBodyContent;
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   String usersCurrentState;
+
   @override
   void initState() {
     bodyContent = LatestData();
@@ -25,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         body: Container(
           alignment: Alignment.center,
           child: bodyContent,
@@ -43,9 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             title: Text(
               "Latest",
-              style: TextStyle(
+              style: textFieldStyle(
                   fontSize: 20,
-                  color: _curIndex == 0 ? Colors.yellow : Colors.white),
+                  textColor: _curIndex == 0 ? Colors.yellow : Colors.white),
             ),
             activeIcon: Icon(
               FontAwesomeIcons.landmark,
@@ -53,24 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.yellow,
             ),
           ),
-          //          BottomNavigationBarItem(
-          //            icon: Icon(
-          //              FontAwesomeIcons.history,
-          //              size: 20,
-          //              color: Colors.white,
-          //            ),
-          //            title: Text(
-          //              "History",
-          //              style: TextStyle(
-          //                  fontSize: 20,
-          //                  color: _curIndex == 1 ? Colors.yellow : Colors.white),
-          //            ),
-          //            activeIcon: Icon(
-          //              FontAwesomeIcons.history,
-          //              size: 20,
-          //              color: Colors.yellow,
-          //            ),
-          //          ),
           BottomNavigationBarItem(
             icon: Icon(
               FontAwesomeIcons.handsHelping,
@@ -79,9 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             title: Text(
               "Helpline",
-              style: TextStyle(
+              style: textFieldStyle(
                   fontSize: 20,
-                  color: _curIndex == 1 ? Colors.yellow : Colors.white),
+                  textColor: _curIndex == 1 ? Colors.yellow : Colors.white),
             ),
             activeIcon: Icon(
               FontAwesomeIcons.handsHelping,
@@ -97,9 +82,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             title: Text(
               "Notification",
-              style: TextStyle(
+              style: textFieldStyle(
                   fontSize: 20,
-                  color: _curIndex == 2 ? Colors.yellow : Colors.white),
+                  textColor: _curIndex == 2 ? Colors.yellow : Colors.white),
             ),
             activeIcon: Icon(
               Icons.notifications,
@@ -117,9 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
               case 0:
                 bodyContent = LatestData();
                 break;
-              //              case 1:
-              //                bodyContent = HistoryPage();
-              //                break;
               case 1:
                 bodyContent = ContactsPage();
                 break;

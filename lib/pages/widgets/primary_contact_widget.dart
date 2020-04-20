@@ -1,4 +1,5 @@
 import 'package:covid19graphs/models/contacts_helpline.dart';
+import 'package:covid19graphs/widget/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,7 +12,8 @@ class PrimaryContactWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Wrap(
+      shape: getCustomBeveledRectangleBorder(15.0),
+      child: Column(
         children: [
           ListTile(
             leading: FaIcon(FontAwesomeIcons.phoneAlt),

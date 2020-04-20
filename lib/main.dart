@@ -11,8 +11,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'FlutterShare',
-      theme: ThemeData(primarySwatch: Colors.orange, accentColor: Colors
-          .deepOrangeAccent),
+      theme: ThemeData(
+          primarySwatch: Colors.orange,
+          accentColor: Colors.deepOrangeAccent,
+          scaffoldBackgroundColor: Colors.white60,
+          cardColor: Colors.white,
+      ),
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
     );

@@ -6,6 +6,7 @@ import 'package:covid19graphs/repository/notification_advisory_repo.dart';
 import 'package:covid19graphs/widget/header.dart';
 import 'package:covid19graphs/widget/progress.dart';
 import 'package:covid19graphs/widget/textfiledstyles.dart';
+import 'package:covid19graphs/widget/themes.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
@@ -72,6 +73,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return ListView.builder(
         itemBuilder: (context, index) {
           return Card(
+            shape: getCustomBeveledRectangleBorder(8),
               child: ListTile(
             title: Text(
               list[index].title,
@@ -96,6 +98,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       // false = user must tap button, true = tap outside dialog
       builder: (BuildContext dialogContext) {
         return AlertDialog(
+          shape: getCustomBeveledRectangleBorder(35.0),
           title: Text('Credits'),
           content: Wrap(
             children: [
